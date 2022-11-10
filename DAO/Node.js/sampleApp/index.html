@@ -126,8 +126,8 @@
         case 2:
           socket.emit('update',{
             tableName: document.getElementById('table').value,
-            tableName: document.getElementById('set').value,
-            field: document.getElementById('where').value
+            setParameter: document.getElementById('set').value,
+            whereParameter: document.getElementById('where').value
           })
           document.getElementById('table').value=''
           document.getElementById('set').value=''
@@ -137,7 +137,7 @@
         case 3:
           socket.emit('delete',{
             tableName: document.getElementById('table').value,
-            field: document.getElementById('where').value
+            whereParameter: document.getElementById('where').value
           })
           document.getElementById('table').value=''
           document.getElementById('where').value=''
