@@ -20,7 +20,7 @@ const sql=require('./modules/db_conn')()
  * 외부 모듈 require
  * 현재 오류나서 주석처리했어요
  * **/
-//const DAO=require('../dao')
+const DAO=require('./modules/dao')
 
 io.on('connection', async (socket) => {
     console.log('socket connected');

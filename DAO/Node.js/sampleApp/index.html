@@ -35,7 +35,7 @@
         <input id="table" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
       </div>
       <div class="input-group mb-3">
-        <span class="input-group-text" id="inputGroup-sizing-default">table</span>
+        <span class="input-group-text" id="inputGroup-sizing-default">field</span>
         <input id="field" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
       </div>
       <div class="input-group mb-3">
@@ -49,12 +49,12 @@
       document.getElementById('option').innerText='select'
       document.getElementById('dao').innerHTML=`
       <div class="input-group mb-3">
-        <span class="input-group-text" id="inputGroup-sizing-default">columns</span>
-        <input id="columns" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
-      </div>
-      <div class="input-group mb-3">
         <span class="input-group-text" id="inputGroup-sizing-default">table</span>
         <input id="table" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+      </div>
+      <div class="input-group mb-3">
+        <span class="input-group-text" id="inputGroup-sizing-default">columns</span>
+        <input id="columns" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
       </div>
       <div class="input-group mb-3">
         <span class="input-group-text" id="inputGroup-sizing-default">where</span>
@@ -71,7 +71,7 @@
         <input id="table" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
       </div>
       <div class="input-group mb-3">
-        <span class="input-group-text" id="inputGroup-sizing-default">table</span>
+        <span class="input-group-text" id="inputGroup-sizing-default">set</span>
         <input id="set" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
       </div>
       <div class="input-group mb-3">
@@ -114,12 +114,12 @@
         // select
         case 1:
           socket.emit('select', {
-            tableName: document.getElementById('columns').value,
-            field: document.getElementById('table').value,
+            tableName: document.getElementById('table').value,
+            field: document.getElementById('columns').value,
             whereParameter: document.getElementById('where').value
           })
-          document.getElementById('columns').value=''
           document.getElementById('table').value=''
+          document.getElementById('columns').value=''
           document.getElementById('where').value=''
           break;
         // update
