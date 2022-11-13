@@ -18,7 +18,7 @@ const sql=require('./modules/db_conn')()
 
 /**
  * 외부 모듈 require
- * 현재 오류나서 주석처리했어요
+ * DAO module
  * **/
 const DAO=require('./modules/dao')
 
