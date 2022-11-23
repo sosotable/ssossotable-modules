@@ -9,27 +9,6 @@ from webdriver_manager.chrome import ChromeDriverManager
 
 import time
 
-# DB 연동 모듈
-import pymysql.cursors
-import pymysql
-import pandas as pd
-import numpy as np
-
-# DAO 클래스
-# 추가구현 필요
-class DAO:
-    connection=None
-    
-    def __init__(self):
-        self.connection = None
-
-    def get_connection(self):
-        return pymysql.connect(host='*',
-                             user='*',
-                             password='*',
-                             database='*',
-                             cursorclass=pymysql.cursors.DictCursor)
-
 # 크롤링 클래스
 class Crawler:
     driver=None
