@@ -7,3 +7,7 @@
 <img src="https://img.shields.io/badge/AWS%20Lambda-FF9900?style=for-the-badge&logo=AWS%20Lambda&logoColor=white" style="width:180px;"> 
 
 <img src="https://img.shields.io/badge/Amazon%20RDS-527FFF?style=for-the-badge&logo=Amazon%20RDS&logoColor=white" style="width:180px;"> 
+
+---
+### 참조: 소소식탁 api document
+https://github.com/sosotable/.github/wiki/%EC%86%8C%EC%86%8C%EC%8B%9D%ED%83%81-API-document
