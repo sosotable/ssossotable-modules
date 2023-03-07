@@ -6,6 +6,11 @@ export const handler = async(event) => {
     if(event.httpMethod == 'GET') {
         const response = {
             statusCode: 200,
+            headers: {
+                "Access-Control-Allow-Headers" : "Content-Type",
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
+            },
             body: JSON.stringify('ssossotest aws Lambda'),
         };
         return response;
@@ -13,7 +18,6 @@ export const handler = async(event) => {
     else if(event.httpMethod == 'POST') {
         const dao = new DAO()
         await dao.init()
-
         const body = JSON.parse(event.body)
         const DML = body.DML
         let responseData, statusCode
@@ -42,6 +46,12 @@ export const handler = async(event) => {
         finally {
             const response = {
                 statusCode: statusCode,
+                // MARK: cors 헤더 추가
+                headers: {
+                    "Access-Control-Allow-Headers" : "Content-Type",
+                    "Access-Control-Allow-Origin": "*",
+                    "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
+                },
                 body: JSON.stringify(responseData),
             };
             return response;
