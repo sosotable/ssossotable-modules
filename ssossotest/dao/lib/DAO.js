@@ -11,10 +11,11 @@ export class DAO {
         }
     }
 
-    // MARK: DB 연결 설립과 해제
+    // MARK: DB 연결 설립
     async init() {
         DAO.connection = await init();
     }
+    // MARK: DB 연결 해제
     async end() {
         await DAO.connection.end();
     }
