@@ -1,7 +1,7 @@
 // MDN WebSocket documentation
 // https://developer.mozilla.org/en-US/docs/Web/API/WebSocket
 
-const socket = new WebSocket('wss://26qu7nodpd.execute-api.us-east-2.amazonaws.com/production')
+const socket = new WebSocket('endpoint')
 
 socket.addEventListener('open', e => {
     console.log('WebSocket is connected')

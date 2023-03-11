@@ -1,27 +1,19 @@
 import AWS from 'aws-sdk'
+import {DAO} from './lib/DAO.js'
 
 const api = new AWS.ApiGatewayManagementApi({
-    endpoint: '26qu7nodpd.execute-api.us-east-2.amazonaws.com/production'
+    endpoint: process.env.ENDPOINT
 })
 
-const options = ['Yes', 'No', 'Maybe', 'Probably', 'Probably Not']
-
 export const handler = async(event) => {
-    console.log(event)
-
     let route, connectionId
-    try {
-        route = event.requestContext.routeKey
-    }
-    catch (e) {
-        console.log(e)
-    }
-    try {
-        connectionId = event.requestContext.connectionId
-    }
-    catch (e) {
-        console.log(e)
-    }
+    const body = JSON.parse(event.body)
+    const dao = new DAO()
+    await dao.init()
+    try { route = event.requestContext.routeKey }
+    catch (e) { console.log(e) }
+    try { connectionId = event.requestContext.connectionId }
+    catch (e) { console.log(e) }
 
     switch (route) {
         case '$connect':
@@ -30,10 +22,18 @@ export const handler = async(event) => {
         case '$disconnect':
             console.log('Disconnection occurred')
             break
-        case 'message':
-            console.log('Received message:', event.body)
-            await replyToMessage(options[Math.floor(Math.random() * options.length)], connectionId)
+        case 'INSERT':
+            await dao.insert(body.table, body.columns, body.values);
+            break;
+        case 'SELECT':
+            await replyToMessage(dao, body, connectionId)
             break
+        case "UPDATE":
+            await dao.update(body.table, body.set, body.where);
+            break;
+        case "DELETE":
+            await dao.delete(body.table, body.where);
+            break;
         default:
             console.log('Received unknown route:', route)
     }
@@ -43,11 +43,12 @@ export const handler = async(event) => {
     }
 }
 
-async function replyToMessage(response, connectionId) {
-    const data = { message: response }
+async function replyToMessage(dao, body, connectionId) {
+    const data = await dao.select(body.columns, body.table, body.where);
+    const responseData = { message: data }
     const params = {
         ConnectionId: connectionId,
-        Data: Buffer.from(JSON.stringify(data))
+        Data: Buffer.from(JSON.stringify(responseData))
     }
 
     return api.postToConnection(params).promise()
