@@ -1,5 +1,6 @@
 import { makeSignature } from './config/configs.mjs'
-import { mailForm } from "../components/components.js";
+import { mailForm, findForm } from "../components/components.js";
+import axios from 'axios';
 
 export async function mailSender(sendData) {
     const timeStamp = Date.now().toString();
@@ -10,7 +11,7 @@ export async function mailSender(sendData) {
         "x-ncp-iam-access-key": process.env.NAVER_CLOUD_ACCESS_KEY,
         "x-ncp-apigw-signature-v2": signature,
     };
-    const data = {
+    const data  = {
         senderAddress: sendData.senderAddress,
         title: sendData.title,
         body: mailForm(sendData.body),
@@ -22,6 +23,7 @@ export async function mailSender(sendData) {
         ],
         individual:true
     };
+    
     return new Promise(async (resolve, reject)=>{
         let returnValue
         try {
